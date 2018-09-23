@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Contact Us</title>
+  </head>
+  <body>
+    <p>Email: {{ email }}</p>
+    <p>Mobile: {{ mobile }}</p>
+    <h3>Addresses</h3>
+    <ul>
+      {% for address in addresses %}
+        <li>
+          {{ address }}
+        </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
