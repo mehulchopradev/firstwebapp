@@ -1,6 +1,6 @@
 Resources
 - CSS, Javascript, HTML, Images : Static resources
-- Dynamic resources (Server side technologies) : 
+- Dynamic resources (Server side technologies) :
 	- They send a dynamic or different html response to the client based on the request
 	- That interact with a database and CRUD (Create, Read, update, delete), login
 	- Logic that needs to execute at the server side
@@ -18,6 +18,7 @@ pip install django
 python -m django --version
 
 - django-admin startproject firstwebapp
+- python manage.py startapp library
 
 URL
 home/ -> firstwebapp -> urls.py -> urlpatterns -> there is a match -> call a function which will generate the html to be sent in the response
