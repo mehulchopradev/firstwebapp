@@ -6,5 +6,10 @@ app_name = 'library'
 
 urlpatterns = [
     path('login/', views.showlogin, name='login-page'),
-    path('reg/', views.showregister, name='register-page')
+    path('reg/', views.showregister, name='register-page'),
+    path('users/', views.registeruser, name='register-user'),
+    path('auth/', views.authenticateuser, name='auth-user'),
+    path('home/', views.showhome, name='home-page'),
+    path('books/<int:bookId>', views.showbook, name='show-book'),
+    path('logout/', views.logout, name='logout')
 ]

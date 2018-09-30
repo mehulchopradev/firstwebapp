@@ -6,7 +6,8 @@
   </head>
   <body>
     <h2>Register Here</h2>
-    <form method="post">
+    <form method="post" action="{% url 'library:register-user' %}">
+      {% csrf_token %}
       <p>
         <input type="text" name="username" value="">
       </p>

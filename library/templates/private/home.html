@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Home Page</title>
+  </head>
+  <body>
+    <p>Welcome {{ username }}</p>&nbsp;
+    <a href="{% url 'library:logout' %}">Logout</a>
+    <h2>Welcome to library management system</h2>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Pages</th>
+          <th>Price</th>
+          <th>Publication House</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for book in booklist %}
+          <tr>
+            <td>
+              <a href="{% url 'library:show-book' book.id %}">
+                {{ book.title }}
+              </a>
+            </td>
+            <td>{{ book.pages }}</td>
+            <td>{{ book.price }}</td>
+            <td>{{ book.publicationhouse.name }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

@@ -6,12 +6,13 @@
   </head>
   <body>
     <h2>Login Here</h2>
-    <form method="post">
+    <form method="post" action="{% url 'library:auth-user' %}">
+      {% csrf_token %}
       <p>
-        <input type="text" name="username" value="">
+        <input type="text" name="username" value="" placeholder="Enter username">
       </p>
       <p>
-        <input type="password" name="password" value="">
+        <input type="password" name="password" value="" placeholder="Enter password">
       </p>
       <p>
         <input type="submit" value="Login">&nbsp;
