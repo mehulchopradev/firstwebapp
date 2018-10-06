@@ -1,0 +1,21 @@
+<!-- master layout -->
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>
+      {% block title %}
+      {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{% static 'library/css/styles.css' %}">
+  </head>
+  <body>
+    <img class="banner" src="{% static 'library/images/big_data.jpg' %}" alt="">
+    {% block content %}
+    {% endblock %}
+    <footer>
+      All Rights 2018 Copyright Reserved
+    </footer>
+  </body>
+</html>

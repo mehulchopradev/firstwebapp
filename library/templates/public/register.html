@@ -1,34 +1,33 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Login here</title>
-  </head>
-  <body>
-    <h2>Register Here</h2>
-    <form method="post" action="{% url 'library:register-user' %}">
-      {% csrf_token %}
-      <p>
-        <input type="text" name="username" value="">
-      </p>
-      <p>
-        <input type="password" name="password" value="">
-      </p>
-      <p>
-        Gender:
-        <input type="radio" name="gender" value="m">Male&nbsp;
-        <input type="radio" name="gender" value="f">Female
-      </p>
-      <p>
-        Country:
-        <select name="country">
-          <option value="India">India</option>
-          <option value="USA">USA</option>
-        </select>
-      </p>
-      <p>
-        <input type="submit" value="Register">
-      </p>
-    </form>
-  </body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}
+  Registration Page!
+{% endblock %}
+
+{% block content %}
+  <h2>Register Here</h2>
+  <form method="post" action="{% url 'library:register-user' %}">
+    {% csrf_token %}
+    <p>
+      <input type="text" name="username" value="">
+    </p>
+    <p>
+      <input type="password" name="password" value="">
+    </p>
+    <p>
+      Gender:
+      <input type="radio" name="gender" value="m">Male&nbsp;
+      <input type="radio" name="gender" value="f">Female
+    </p>
+    <p>
+      Country:
+      <select name="country">
+        <option value="India">India</option>
+        <option value="USA">USA</option>
+      </select>
+    </p>
+    <p>
+      <input type="submit" value="Register">
+    </p>
+  </form>
+{% endblock %}

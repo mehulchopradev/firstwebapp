@@ -2,6 +2,12 @@ from django.shortcuts import render, reverse
 from django.http import HttpResponse, HttpResponseRedirect
 
 from library.models import Student, Book
+from rest_framework import viewsets
+from library.serializers import StudentSerializer
+
+class StudentViewSet(viewsets.ModelViewSet):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
 
 # Create your views here.
 
@@ -33,6 +39,7 @@ def authenticateuser(request):
         # session (logged in user specific from a machine)
         # store multiple data in the session
         request.session['loggedinusername'] = username # remember the username at django server for the user session
+        request.session['loggedinuserid'] = sl[0].id
 
         return HttpResponseRedirect(reverse('library:home-page'))
     else:
@@ -43,10 +50,43 @@ def showhome(request):
         return HttpResponseRedirect(reverse('library:login-page'))
 
     booklist = Book.objects.all()
+    studentid = request.session['loggedinuserid']
+
+    for book in booklist:
+        book.isbookissued = len(book.student_set.filter(pk=studentid)) > 0
+
+        if book.noofcopies:
+            issuedcount = book.student_set.count()
+            copieslefttoissue = book.noofcopies - issuedcount
+            book.cannotissue = copieslefttoissue == 0
+        else:
+            book.cannotissue = True
+
     return render(request, 'private/home.html', {
         'booklist': booklist,
-        'username': request.session['loggedinusername'] #access the remembered data from the session
+        'username': request.session['loggedinusername'], #access the remembered data from the session
+        'studentId': request.session['loggedinuserid']
     })
+
+def issuebook(request, bookId):
+    studentId = request.session['loggedinuserid']
+
+    student = Student.objects.get(pk=studentId)
+    book = Book.objects.get(pk=bookId)
+
+    student.booksissued.add(book)
+
+    student.save()
+
+    return HttpResponseRedirect(reverse('library:home-page'))
+
+def returnbook(request, bookId):
+    book = Book.objects.get(pk=bookId)
+    studentid = request.session['loggedinuserid']
+
+    book.student_set.remove(studentid)
+
+    return HttpResponseRedirect(reverse('library:home-page'))
 
 def showbook(request, bookId):
     if 'loggedinusername' not in request.session:

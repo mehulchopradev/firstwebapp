@@ -22,3 +22,31 @@ python -m django --version
 
 URL
 home/ -> firstwebapp -> urls.py -> urlpatterns -> there is a match -> call a function which will generate the html to be sent in the response
+
+Format of data exchange
+- XML
+- JSON
+
+Client would perform actions on ur resource (Book) in a web service model
+- Create : URL -> /create-book | Data exchange -> JSON ?? URL ?? | Response code -> ??
+- Update : URL -> /update-book
+- Delete : URL -> /delete | Response code -> ??
+- Query : URL -> /getbooks | | Response code -> ??
+
+Fix the chaos in web service model -> Architectural style -> REST
+- Resource name should be plural : books
+- Create : URL -> /books | Http Methods -> POST
+- Query : URL -> /books | Http Method -> GET
+- Update : URL -> /books/<bookId> | Http Method -> PUT
+- Delete : URL -> /books/<bookId> | Http Method -> DELETE
+- Query for a book : URL -> /books/<bookId> | Http Method -> GET
+
+Response Codes : REST
+- Success
+	- POST -> 201
+	- GET -> 200
+	- PUT -> 200
+	- DELETE -> 204 or 200
+- Errors
+	- Client side error : 4xx HTTP
+	- Server side error : 5xx HTTP

@@ -21,6 +21,7 @@ class Book(models.Model):
     price = models.FloatField(null=True)
     pages = models.IntegerField()
     isbn = models.CharField(max_length=50, null=True)
+    noofcopies = models.IntegerField(default=0)
     publicationhouse = models.ForeignKey(PublicationHouse, on_delete=models.CASCADE, default=None)
 
     def __str__(self):
@@ -39,6 +40,7 @@ class Student(models.Model):
     password = models.CharField(max_length=20)
     gender = models.CharField(max_length=1)
     country = models.CharField(max_length=20)
+    booksissued = models.ManyToManyField(Book)
 
     def __str__(self):
         return self.username
